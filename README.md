@@ -3,6 +3,28 @@ Self-Driving Car Engineer Nanodegree Program
 
 ---
 
+## Rubic Points
+
+* The Model: Student describes their model in detail. This includes the state, actuators and update equations.
+
+The model has the following state vector: x coordinates (x), y coordinates (y), orientation angle (psi), velocity (v), cross track error (cte) and psi error (epsi). Actuators includes the steering angle (delta0) and accelations (a0). The model I used was the kinetic model introduced in the lessons:
+
+![model](./img/model.png)
+
+The cost function includes the cte, epsi, delta0, a0, the derivative of delta0 and a0. I weighted these values in the cost function to smooth the turning of the car.
+
+* Timestep Length and Elapsed Duration (N & dt): Student discusses the reasoning behind the chosen N (timestep length) and dt (elapsed duration between timesteps) values. Additionally the student details the previous values tried.
+
+The N and dt I choose was 10 and 0.1. I tried different combinations for example 20 / 0.05 and 8 / 0.125, but these values did not give as good results as 10 and 0.1. Also the time elapse 0.1 is best to account for the latency of the model.
+
+* Polynomial Fitting and MPC Preprocessing: A polynomial is fitted to waypoints. If the student preprocesses waypoints, the vehicle state, and/or actuators prior to the MPC procedure it is described.
+
+The waypoints are prepocessed to simply the process to fit a polynomial. The waypoints are first adjusted to start from the origin (0, 0) and the orientation angle was mapped to 0. 
+
+* Model Predictive Control with Latency: The student implements Model Predictive Control that handles a 100 millisecond latency. Student provides details on how they deal with latency.
+
+The latency of 100 millisecond was dealt with using the actuators from the previous state as the current state. The dt I chose was 0.1s which happens to be exactly 100 millisecond.
+
 ## Dependencies
 
 * cmake >= 3.5
